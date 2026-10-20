@@ -44,13 +44,13 @@ $('stop').onclick=()=>{a.pause();a.currentTime=0};
 $('mute').onclick=()=>{a.muted=!a.muted;$('mute').innerHTML=a.muted?I.mute:I.vol};
 vol.oninput=()=>{a.volume=vol.value/100*VOLUME_SCALE;a.muted=false;$('mute').innerHTML=I.vol;fill(vol)};
 seek.oninput=()=>{if(a.duration)a.currentTime=a.duration*seek.value/1000;fill(seek)};
-a.onplay=()=>{$('play').innerHTML=I.pause;$('play').ariaLabel='พัก';$('cover').classList.add('spin');$('eq').classList.add('on')};
-a.onpause=()=>{$('play').innerHTML=I.play;$('play').ariaLabel='เล่น';$('cover').classList.remove('spin');$('eq').classList.remove('on')};
+a.onplay=()=>{$('play').innerHTML=I.pause;$('play').ariaLabel='Pause';$('cover').classList.add('spin');$('eq').classList.add('on')};
+a.onpause=()=>{$('play').innerHTML=I.play;$('play').ariaLabel='Play';$('cover').classList.remove('spin');$('eq').classList.remove('on')};
 a.onended=()=>tracks.length>1?load(idx+1,true):(a.currentTime=0);
 a.ontimeupdate=()=>{$('cur').textContent=fmt(a.currentTime);if(a.duration){seek.value=a.currentTime/a.duration*1000;fill(seek)}};
 a.onloadedmetadata=()=>{$('dur').textContent=fmt(a.duration);tracks[idx].dur=fmt(a.duration);renderList()};
 a.onerror=()=>{const t=tracks[idx];if(!t.tried){t.tried=1;a.src=flat(t.src);return}
-  $('err').textContent='หาไฟล์เพลงไม่เจอ ต้องวาง crave.mp3 ไว้ใน music/tracks/ (ข้างๆ index.html)'};
+  $('err').textContent='Audio file not found. Place crave.mp3 in music/tracks/ next to index.html.'};
 a.volume=.2*VOLUME_SCALE;fill(vol);load(0,false);
 updateGlow(tracks[0].cover);
 tryImg($('av'),AVATAR,im=>{im.hidden=false;$('ini').hidden=true;buildProfileHitMap(im)});
