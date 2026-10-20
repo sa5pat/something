@@ -15,7 +15,7 @@ function tryImg(img,src,ok,fail){img.onload=()=>ok&&ok(img);img.onerror=()=>{if(
 /* ===== Music player ===== */
 const $=id=>document.getElementById(id);
 const a=$('audio'),list=$('list'),seek=$('seek'),vol=$('vol');let idx=0;
-const VOLUME_SCALE=.3;
+const VOLUME_SCALE=matchMedia('(pointer: coarse)').matches?1:.3;
 let glowRequest=0;
 const fmt=s=>isFinite(s)?Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0'):'0:00';
 const I={play:'<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>',pause:'<svg viewBox="0 0 24 24"><path d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg>',
